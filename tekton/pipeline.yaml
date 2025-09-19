@@ -24,19 +24,19 @@ spec:
       taskRef:
         name: cleanup
 
-  #  - name: clone
-  #    workspaces:
-  #      - name: output
-  #        workspace: pipeline-workspace
-  #    taskRef:
-  #      name: git-clone
-  #    params:
-  #    - name: url
-  #      value: $(params.repo-url)
-  #    - name: revision
-  #      value: $(params.branch)
-  #    runAfter:
-  #      - init
+    - name: clone
+      workspaces:
+        - name: output
+          workspace: pipeline-workspace
+      taskRef:
+        name: git-clone
+      params:
+        - name: url
+          value: $(params.repo-url)
+        - name: revision
+          value: $(params.branch)
+      runAfter:
+        - init
 
     - name: lint
       workspaces:
@@ -45,10 +45,10 @@ spec:
       taskRef:
         name: flake8
       params:
-      - name: image
-        value: "python:3.9-slim"
-      - name: args
-        value: ["--count","--max-complexity=10","--max-line-length=127","--statistics"]
+        - name: image
+          value: "python:3.9-slim"
+        - name: args
+          value: [ "--count","--max-complexity=10","--max-line-length=127","--statistics" ]
       runAfter:
         - clone
 
@@ -59,10 +59,10 @@ spec:
       taskRef:
         name: nose
       params:
-      - name: database_uri
-        value: "sqlite:///test.db"
-      - name: args
-        value: "-v --with-spec --spec-color"
+        - name: database_uri
+          value: "sqlite:///test.db"
+        - name: args
+          value: "-v --with-spec --spec-color"
       runAfter:
         - clone
 
@@ -74,8 +74,8 @@ spec:
         name: buildah
         kind: ClusterTask
       params:
-      - name: IMAGE
-        value: "$(params.build-image)"
+        - name: IMAGE
+          value: "$(params.build-image)"
       runAfter:
         - tests
         - lint
