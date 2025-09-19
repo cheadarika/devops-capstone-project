@@ -122,6 +122,15 @@ Please only use these commands for working stand-alone on your own computer with
 
 You can now perform Tekton development locally, just like in the Cloud IDE lab environment.
 
+## GitHub Actions
+
+Given code is ready to be merged
+When a pull request is created
+Then GitHub Actions should run linting and unit tests
+And the badge should show that the build is passing
+
+![Build Status](https://github.com/<OWNER>/devops-capstone-project/actions/workflows/ci-build.yaml/badge.svg)
+
 ## Author
 
 [John Rofrano](https://www.coursera.org/instructor/johnrofrano), Senior Technical Staff Member, DevOps Champion, @ IBM Research, and Instructor @ Coursera
